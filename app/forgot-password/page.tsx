@@ -14,7 +14,7 @@ export default function ForgotPasswordPage() {
         email,
         {
           redirectTo:
-            "http://localhost:3000/update-password",
+            "https://project-odyssey-chi.vercel.app/update-password",
         }
       );
 
