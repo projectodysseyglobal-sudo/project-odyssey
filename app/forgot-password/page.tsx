@@ -1,10 +1,8 @@
-"use client";
-
+"use client";  
 import { useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import PublicNavbar from "@/components/PublicNavbar";
-
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
 
