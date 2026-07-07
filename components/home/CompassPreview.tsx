@@ -72,7 +72,6 @@ lg:w-36
 
 </div>
         {/* Description */}
-
         <p
           className="
             mt-10

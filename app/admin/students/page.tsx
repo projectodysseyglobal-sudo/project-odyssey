@@ -65,7 +65,7 @@ export default function AdminStudentsPage() {
             grade,
             country,
             interests,
-            financial_situation,
+            financial_situations,
             created_at
           `)
           .eq(
@@ -129,8 +129,9 @@ export default function AdminStudentsPage() {
             selectedFinancial ===
               "All" ||
 
-            student.financial_situation ===
-              selectedFinancial;
+            student.financial_situations?.includes(
+  selectedFinancial
+);
 
           return (
             matchesSearch &&
@@ -157,13 +158,10 @@ export default function AdminStudentsPage() {
       </main>
 
     );
-
   }
-
   return (
 
     <>
-
       <AdminNavbar />
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
@@ -223,7 +221,6 @@ export default function AdminStudentsPage() {
                   e.target.value
                 )
               }
-
               className="
                 w-full
                 bg-[#2A2F72]
@@ -236,9 +233,6 @@ export default function AdminStudentsPage() {
             />
 
           </div>
-
-          
-
           {/* Students Table */}
           <div
   className="
@@ -452,38 +446,39 @@ export default function AdminStudentsPage() {
 
                 <td className="p-5">
 
-                  <span
-                    className={`
-                      px-4
-                      py-2
-                      rounded-full
-                      text-sm
+                 <div className="flex flex-wrap gap-2">
 
-                      ${
-                        student.financial_situation ===
-                        "Scholarship"
+  {student.financial_situations?.length ? (
 
-                          ? "bg-green-600"
+    student.financial_situations.map(
+      (item: string) => (
 
-                          : student.financial_situation ===
-                            "Need Based"
+        <span
+          key={item}
+          className="
+            bg-[#44528A]
+            text-white
+            px-3
+            py-1
+            rounded-full
+            text-xs
+          "
+        >
+          {item}
+        </span>
 
-                          ? "bg-blue-600"
+      )
+    )
 
-                          : student.financial_situation ===
-                            "Self Funded"
+  ) : (
 
-                          ? "bg-yellow-500 text-black"
+    <span className="text-[#A3C2E0]">
+      -
+    </span>
 
-                          : "bg-[#353C72]"
-                      }
-                    `}
-                  >
+  )}
 
-                    {student.financial_situation ||
-                      "-"}
-
-                  </span>
+</div>
 
                 </td>
 

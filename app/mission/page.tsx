@@ -13,7 +13,7 @@ export default function MissionPage() {
         {/* HERO */}
         {/* ================================================= */}
 
-        <section className="relative -mt-[2px] overflow-hidden">
+        <section className="relative-mt-[2px] overflow-hidden">
 
           <div className="max-w-7xl mx-auto px-8 pt-12 pb-16">
 
@@ -237,9 +237,9 @@ export default function MissionPage() {
           />
         </svg>
 
-        <section className="bg-[#6C9BD5] py-20">
+        <section className="bg-[#6C9BD5] py-16">
 
-          <div className="max-w-5xl mx-auto px-8 text-center">
+          <div className="max-w-5xl mx-auto px-8 text-center mx-auto">
 
             <h2
   className="
@@ -268,8 +268,23 @@ export default function MissionPage() {
   </span>
   ”
 </h2>
-
+<p
+            className="
+              mt-15
+              text-xl
+              italic
+              text-white
+            "
+            style={{
+              fontFamily:
+                '"Times New Roman", serif',
+            }}
+          >
+                         — Suyathi Mugunthan & Naomi Hayward,
+                          Co-Founders
+          </p>
           </div>
+          
 
         </section>
 

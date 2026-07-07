@@ -382,7 +382,6 @@ sm:text-2xl mt-2">
             </div>
 
             <div>
-
               <p className="text-[#A3C2E0]">
                 Joined
               </p>
@@ -402,46 +401,52 @@ sm:text-2xl mt-2">
 
             <div>
 
-              <p className="text-[#A3C2E0]">
-                Financial Situation
-              </p>
+  <p className="text-[#A3C2E0]">
+    Financial Situation
+  </p>
 
-              <span
-                className={`
-                  inline-block
-                  mt-3
-                  px-5
-                  py-2
-                  rounded-full
+  <div className="flex flex-wrap gap-2 mt-3">
 
-                  ${
-                    student.financial_situation ===
-                    "Scholarship"
+    {student.financial_situations?.length ? (
 
-                      ? "bg-green-600"
+      student.financial_situations.map(
+        (item: string) => (
 
-                      : student.financial_situation ===
-                        "Need Based"
+          <span
+            key={item}
+            className="
+              inline-block
+              px-4
+              py-2
+              rounded-full
+              bg-[#44528A]
+              text-[#F8F8F4]
+              text-sm
+            "
+          >
+            {item}
+          </span>
 
-                      ? "bg-blue-600"
+        )
+      )
 
-                      : student.financial_situation ===
-                        "Self Funded"
+    ) : (
 
-                      ? "bg-yellow-500 text-black"
+      <span
+        className="
+          inline-block
+          px-4
+          py-2
+          rounded-full
+          bg-[#353C72]
+        "
+      >
+        -
+      </span>
 
-                      : "bg-[#353C72]"
-                  }
-                `}
-              >
-
-                {student.financial_situation ||
-                  "-"}
-
-              </span>
-
-            </div>
-
+    )}
+  </div>
+</div>
           </div>
 
           {/* Interests */}

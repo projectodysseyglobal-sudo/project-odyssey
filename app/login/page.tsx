@@ -242,7 +242,6 @@ export default function LoginPage() {
 
             {/* Login */}
 
-            {/* Login */}
 
 <div className="mt-10 sm:mt-14 lg:mt-16">
 
@@ -251,9 +250,9 @@ export default function LoginPage() {
     disabled={loading}
     className="
       text-[#F4C3D5]
-      text-2xl
-      sm:text-3xl
-      md:text-[36px]
+      text-1xl
+      sm:text-2xl
+      md:text-[28px]
       font-semibold
       underline
       decoration-dotted

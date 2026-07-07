@@ -16,23 +16,18 @@ export default function Dashboard() {
       } = await supabase.auth.getUser();
       console.log("CURRENT USER:", user);
       if (!user) return;
-
       const { data: profileData } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
         .single();
-
       setProfile(profileData);
-
 console.log("PROFILE:", profileData);
 console.log("INTERESTS:", profileData?.interests);
-
 const { data: allOpportunities } =
   await supabase
     .from("opportunities")
     .select("title, subject, category");
-
 console.log(
   "ALL OPPORTUNITIES:",
   allOpportunities
@@ -45,7 +40,6 @@ console.log(
   "subject",
   profileData.interests || []
 );
-
 console.log(
   "INTERESTS:",
   profileData.interests
@@ -58,7 +52,6 @@ console.log(
   "RECOMMENDATION ERROR:",
   error
 );
-
 setRecommended(recommendedData || []);
 const { data: savedData } = await supabase
   .from("saved_opportunities")
@@ -67,10 +60,8 @@ const { data: savedData } = await supabase
     opportunities (*)
   `)
   .eq("user_id", user.id);
-
       setSaved(savedData || []);
     }
-
     loadData();
   }, []);
 async function removeSaved(id: number) {
@@ -87,9 +78,7 @@ async function removeSaved(id: number) {
     alert(error.message);
     return;
   }
-
   alert("Deleted successfully");
-
   setSaved(
     saved.filter((item) => item.id !== id)
   );
@@ -97,23 +86,18 @@ async function removeSaved(id: number) {
 return (
   <>
     <StudentNavbar />
-
     <main className="min-h-screen bg-[#353C72] text-white">
-
   {/* Hero */}
   {profile && (
     <DashboardHero
       name={profile.name}
     />
   )}
-
   {/* Wave */}
   <WaveDivider />
  {/* Saved */}
   <section className="bg-[#7BA3D8] py-16">
-
     <div className="max-w-7xl mx-auto px-8">
-
       <h2
         className="
         text-[#F8F8F4]
@@ -123,16 +107,12 @@ return (
       >
         MY VOYAGES
       </h2>
-
       <div className="grid lg:grid-cols-2 gap-8">
-
         {saved.map((item) => (
-
           <div
             key={item.id}
             className="relative"
           >
-
             <OpportunityCard
               id={item.opportunities?.id}
               title={item.opportunities?.title}

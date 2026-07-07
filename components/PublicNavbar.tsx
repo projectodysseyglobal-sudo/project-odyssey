@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 export default function PublicNavbar() {
   const [menuOpen, setMenuOpen] =
     useState(false);
@@ -21,32 +22,38 @@ export default function PublicNavbar() {
   return (
     <nav className="sticky top-0 z-50 bg-[#353c72]">
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-1 flex justify-between items-center">
 
         {/* Logo */}
-        
-          <Link href="/" className="
-  text-[26px]
-  lg:text-[26px]
-  font-semibold
-  tracking-[-0.02em]
-  leading-none
-">
-  <span
-    className="text-[#F8F8F4] font-semibold"
-    style={{ fontFamily: '"Times New Roman", serif' }}
-  >
-    PROJECT
-  </span>
-
-  <span
-    className="text-[#6C9BD5] font-semibold"
-    style={{ fontFamily: '"Times New Roman", serif' }}
-  >
-     ODYSSEY
-  </span>
+         <Link
+  href="/"
+  className="
+    flex
+    items-center
+    transition
+    duration-300
+    hover:opacity-90
+    shrink-0
+  "
+>
+  <Image
+    src="/logo-odyssey.png"
+    alt="Project Odyssey"
+    width={320}
+    height={55}
+    priority
+    className="
+      w-[180px]
+      sm:w-[220px]
+      md:w-[260px]
+      lg:w-[300px]
+      xl:w-[320px]
+      h-auto
+      object-contain
+      select-none
+    "
+  />
 </Link>
-
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 xl:gap-12">
           <a
@@ -86,8 +93,6 @@ style={{
           >
             Mission
           </a>
-
-          
           <a
             href="/compass"
             className="

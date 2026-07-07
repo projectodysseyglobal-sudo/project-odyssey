@@ -85,17 +85,26 @@ export default function AdminPage() {
           head: true,
         });
 
-      const today =
-        new Date()
-          .toISOString()
-          .split("T")[0];
+    const today = new Date();
 
-      const {
-        data: expired,
-      } = await supabase
-        .from("opportunities")
-        .select("id")
-        .lt("deadline", today);
+today.setHours(0, 0, 0, 0);
+
+const todayString = today
+  .toLocaleDateString("en-CA"); // YYYY-MM-DD
+
+const {
+  data: expired,
+  error,
+} = await supabase
+  .from("opportunities")
+  .select("id, deadline")
+  .lte("deadline", todayString);
+
+console.log("Today:", todayString);
+console.log("Expired:", expired);
+console.log("Error:", error);
+
+setExpiredCount(expired?.length ?? 0);
 
       setStudentsCount(
         students || 0
@@ -108,14 +117,8 @@ export default function AdminPage() {
       setBlogsCount(
         blogs || 0
       );
-
-      setExpiredCount(
-        expired?.length || 0
-      );
-
       setLoading(false);
     }
-
     checkAdmin();
   }, [router]);
 
@@ -183,7 +186,6 @@ export default function AdminPage() {
                 DASHBOARD
               </span>
             </h1>
-
             <p
               className="
                 mt-6
@@ -195,15 +197,11 @@ export default function AdminPage() {
               Manage every opportunity,
               every story, every student.
             </p>
-
           </div>
-
           {/* Statistics */}
 
           <div className="grid lg:grid-cols-4 gap-8 mt-20">
-
             <div className="bg-[#2A2F72] rounded-[30px] p-8">
-
               <Users
                 size={34}
                 className="text-[#F4C3D5]"
@@ -216,9 +214,7 @@ export default function AdminPage() {
               <h2 className="text-5xl mt-2">
                 {studentsCount}
               </h2>
-
             </div>
-
             <div className="bg-[#2A2F72] rounded-[30px] p-8">
 
               <Briefcase
@@ -302,9 +298,7 @@ export default function AdminPage() {
                   Add, edit or remove
                   opportunities.
                 </p>
-
               </Link>
-
               <Link
                 href="/admin/blogs"
                 className="
@@ -326,9 +320,7 @@ export default function AdminPage() {
                   Publish and manage
                   blog articles.
                 </p>
-
               </Link>
-
               <Link
                 href="/admin/students"
                 className="
@@ -374,13 +366,9 @@ export default function AdminPage() {
                   Manage student
                   success stories.
                 </p>
-
               </Link>
-
             </div>
-
           </section>
-
           {/* Quote */}
 
           <section className="mt-24 pb-20">
@@ -393,13 +381,11 @@ export default function AdminPage() {
                 text-center
               "
             >
-
               <img
                 src="/door-2.png"
                 alt="Door"
                 className="w-20 mx-auto mb-8"
               />
-
               <h2 className="text-5xl leading-tight">
                 Every Door You Create
                 <span className="text-[#6C9BD5]">
@@ -409,7 +395,6 @@ export default function AdminPage() {
                 <br />
                 A Student's Future.
               </h2>
-
               <p
                 className="
                   mt-8
@@ -422,7 +407,6 @@ export default function AdminPage() {
                 happen by chance—they are
                 created by great people."
               </p>
-
             </div>
 
           </section>

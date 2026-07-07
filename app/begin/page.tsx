@@ -12,7 +12,7 @@ export default function BeginPage() {
 
         <section
           className="
-            min-h-[88vh]
+            min-h-[calc(100vh-84px)]
             flex
             items-center
             justify-center
@@ -35,21 +35,23 @@ export default function BeginPage() {
             {/* Door */}
 
             <img
-              src="/door-icon.ico"
-              alt="Door"
-              draggable={false}
-              className="
-                w-14
-                h-14
-                sm:w-16
-                sm:h-16
-                md:w-20
-                md:h-20
-                mx-auto
-                mb-8
-                select-none
-              "
-            />
+  src="/door-2.png"
+  alt="Door"
+  draggable={false}
+  className="
+    w-[140px]
+    h-[140px]
+    sm:w-[140px]
+    sm:h-[140px]
+    md:w-[160px]
+    md:h-[160px]
+    lg:w-[180px]
+    lg:h-[180px]
+    mx-auto
+    mb-10
+    select-none
+  "
+/>
 
             {/* Heading */}
 
@@ -68,88 +70,81 @@ export default function BeginPage() {
             >
 
               <span
-                className="
-                  block
-                  text-[42px]
-                  sm:text-[56px]
-                  md:text-[70px]
-                  lg:text-[88px]
-                "
-              >
-                YOUR DOOR OPENS
-              </span>
+  className="
+    block
+    text-[32px]
+    sm:text-[42px]
+    md:text-[52px]
+    lg:text-[72px]
+  "
+>
+  YOUR DOOR OPENS
+</span>
 
-              <span
-                className="
-                  block
-                  text-[#6C9BD5]
-                  text-[42px]
-                  sm:text-[56px]
-                  md:text-[70px]
-                  lg:text-[88px]
-                "
-              >
-                HERE.
-              </span>
+<span
+  className="
+    block
+    text-[#6C9BD5]
+    text-[32px]
+    sm:text-[42px]
+    md:text-[52px]
+    lg:text-[72px]
+  "
+>
+  HERE.
+</span>
 
             </h1>
 
             {/* Subtitle */}
 
             <p
-              className="
-                mt-5
-                text-xl
-                sm:text-2xl
-                md:text-3xl
-                italic
-                text-[#6C9BD5]
-              "
-              style={{
-                fontFamily:
-                  '"Times New Roman MT Condensed","Times New Roman",serif',
-              }}
-            >
-              Unveil the journey that awaits.
-            </p>
+  className="
+    mt-6
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    italic
+    text-[#6C9BD5]
+  "
+  style={{
+    fontFamily:
+      '"Times New Roman MT Condensed","Times New Roman",serif',
+  }}
+>
+  Unveil the journey that awaits.
+</p>
 
             {/* Buttons */}
 
             <div
-              className="
-                mt-16
-                sm:mt-20
-                flex
-                flex-col
-                sm:flex-row
-                justify-center
-                items-center
-                gap-8
-                sm:gap-12
-                lg:gap-20
-              "
-            >
+  className="
+    mt-14
+    flex
+    flex-col
+    sm:flex-row
+    justify-center
+    items-center
+    gap-6
+    sm:gap-14
+  "
+>
 
               <Link
                 href="/signup"
                 className="
-                  w-full
-                  sm:w-auto
-                  text-center
-                  text-[28px]
-                  sm:text-[34px]
-                  lg:text-[42px]
-                  font-semibold
-                  text-[#F4C3D5]
-                  underline
-                  decoration-dotted
-                  underline-offset-8
-                  decoration-[3px]
-                  hover:opacity-80
-                  hover:scale-105
-                  transition-all
-                  duration-300
-                "
+  text-[18px]
+  sm:text-[22px]
+  md:text-[26px]
+  font-semibold
+  text-[#F4C3D5]
+  underline
+  decoration-dotted
+  underline-offset-8
+  decoration-[2px]
+  hover:opacity-80
+  transition-all
+"
                 style={{
                   fontFamily:
                     '"Times New Roman MT Condensed","Times New Roman",serif',
@@ -161,23 +156,18 @@ export default function BeginPage() {
               <Link
                 href="/login"
                 className="
-                  w-full
-                  sm:w-auto
-                  text-center
-                  text-[28px]
-                  sm:text-[34px]
-                  lg:text-[42px]
-                  font-semibold
-                  text-[#F4C3D5]
-                  underline
-                  decoration-dotted
-                  underline-offset-8
-                  decoration-[3px]
-                  hover:opacity-80
-                  hover:scale-105
-                  transition-all
-                  duration-300
-                "
+  text-[18px]
+  sm:text-[22px]
+  md:text-[26px]
+  font-semibold
+  text-[#F4C3D5]
+  underline
+  decoration-dotted
+  underline-offset-8
+  decoration-[2px]
+  hover:opacity-80
+  transition-all
+"
                 style={{
                   fontFamily:
                     '"Times New Roman MT Condensed","Times New Roman",serif',

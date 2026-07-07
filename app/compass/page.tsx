@@ -296,8 +296,7 @@ export default function CompassPage() {
                     '"Times New Roman", serif',
                 }}
               >
-                Read article
-                <span>→</span>
+                Read article →
               </div>
 
             </div>
@@ -524,8 +523,7 @@ export default function CompassPage() {
                             '"Times New Roman", serif',
                         }}
                       >
-                        Read article
-                        <span>→</span>
+                        Read article →
                       </span>
 
                     </div>

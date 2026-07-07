@@ -11,12 +11,77 @@ export default function EditProfilePage() {
   const [grade, setGrade] = useState("");
   const [interests, setInterests] =
     useState<string[]>([]);
-  const [country, setCountry] =
+  const interestOptions = [
+  "Medicine",
+  "Engineering",
+  "Business",
+  "Law",
+  "Technology",
+  "Science",
+  "Arts",
+  "Research",
+  "Entrepreneurship",
+  "Social Impact",
+  "Writing",
+  "Other",
+];
+
+const countryOptions = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Argentina",
+  "Australia",
+  "Austria",
+  "Bangladesh",
+  "Belgium",
+  "Brazil",
+  "Canada",
+  "China",
+  "France",
+  "Germany",
+  "India",
+  "Indonesia",
+  "Ireland",
+  "Italy",
+  "Japan",
+  "Malaysia",
+  "Mexico",
+  "Nepal",
+  "Netherlands",
+  "New Zealand",
+  "Nigeria",
+  "Pakistan",
+  "Philippines",
+  "Russia",
+  "Singapore",
+  "South Africa",
+  "South Korea",
+  "Spain",
+  "Sri Lanka",
+  "Sweden",
+  "Switzerland",
+  "Thailand",
+  "UAE",
+  "United Kingdom",
+  "United States",
+  "Vietnam",
+];
+const financialOptions = [
+  "Need Scholarship Support",
+  "Need Full Financial Aid",
+  "Need Partial Financial Aid",
+  "Moderate Support Needed",
+  "Need Merit Scholarship",
+  "Need Need-Based Aid",
+  "No Financial Support Needed",
+];
+const [country, setCountry] =
     useState("");
-  const [
-    financialSituation,
-    setFinancialSituation,
-  ] = useState("");
+const [
+  financialSituations,
+  setFinancialSituations,
+] = useState<string[]>([]);
 
   function toggleInterest(
     interest: string
@@ -57,8 +122,8 @@ export default function EditProfilePage() {
         setCountry(
           data.country || ""
         );
-        setFinancialSituation(
-          data.financial_situation || ""
+        setFinancialSituations(
+          data.financial_situations || []
         );
       }
     }
@@ -79,8 +144,8 @@ export default function EditProfilePage() {
         grade,
         interests,
         country,
-        financial_situation:
-          financialSituation,
+        financial_situations:
+          financialSituations,
       })
       .eq("id", user.id);
 
@@ -167,111 +232,134 @@ export default function EditProfilePage() {
                 Grade
               </label>
 
-              <select
-                value={grade}
-                onChange={(e) =>
-                  setGrade(
-                    e.target.value
-                  )
-                }
-                className="
-                  w-full
-                  bg-[#353C72]
-                  rounded-2xl
-                  p-4
-                  outline-none
-                "
-              >
-                <option value="">
-                  Select Grade
-                </option>
+<select
+  value={grade}
+  onChange={(e) =>
+    setGrade(e.target.value)
+  }
+  className="
+    w-full
+    bg-[#353C72]
+    rounded-2xl
+    p-4
+    outline-none
+  "
+>
+  <option value="">
+    Select Grade
+  </option>
 
-                <option value="9">
-                  Grade 9
-                </option>
+  <option value="9">
+    Grade 9
+  </option>
 
-                <option value="10">
-                  Grade 10
-                </option>
+  <option value="10">
+    Grade 10
+  </option>
 
-                <option value="11">
-                  Grade 11
-                </option>
+  <option value="11">
+    Grade 11
+  </option>
 
-                <option value="12">
-                  Grade 12
-                </option>
+  <option value="12">
+    Grade 12
+  </option>
 
-              </select>
+  <option value="College">
+    College
+  </option>
 
-            </div>
+  <option value="University">
+    University
+  </option>
 
-            {/* Interests */}
-
-            <div className="mb-10">
-
-              <label
-                className="
-                  block
-                  mb-5
-                  text-[#6C9BD5]
-                  uppercase
-                "
-              >
-                Interests
-              </label>
-
-              <div className="grid md:grid-cols-2 gap-4">
-
-                {[
-                  "Medicine",
-                  "Engineering",
-                  "Science",
-                  "Technology",
-                  "Business",
-                  "Law",
-                  "Arts",
-                  "Writing",
-                  "Research",
-                  "Other",
-                ].map(
-                  (interest) => (
-
-                    <label
-                      key={interest}
-                      className="
-                        flex
-                        items-center
-                        gap-3
-                        bg-[#353C72]
-                        rounded-xl
-                        p-4
-                        cursor-pointer
-                      "
-                    >
-
-                      <input
-                        type="checkbox"
-                        checked={interests.includes(
-                          interest
-                        )}
-                        onChange={() =>
-                          toggleInterest(
-                            interest
-                          )
-                        }
-                      />
-
-                      {interest}
-
-                    </label>
-
-                  )
-                )}
-
-              </div>
+  <option value="Graduate">
+    Graduate
+  </option>
+</select>
 
             </div>
+
+{/* Interests */}
+
+<div className="mb-10">
+
+  <label
+    className="
+      block
+      mb-3
+      text-[#6C9BD5]
+      uppercase
+    "
+  >
+    Interests
+  </label>
+
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !interests.includes(e.target.value)
+      ) {
+        setInterests([
+          ...interests,
+          e.target.value,
+        ]);
+      }
+
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select an interest...
+    </option>
+
+    {interestOptions.map((interest) => (
+      <option
+        key={interest}
+        value={interest}
+      >
+        {interest}
+      </option>
+    ))}
+
+  </select>
+
+  <div className="flex flex-wrap gap-3 mt-5">
+
+    {interests.map((interest) => (
+
+      <button
+        key={interest}
+        type="button"
+        onClick={() =>
+          toggleInterest(interest)
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          hover:opacity-80
+          transition
+        "
+      >
+        {interest} ✕
+      </button>
+
+    ))}
+
+  </div>
+
+</div>
 
             {/* Country */}
 
@@ -288,24 +376,33 @@ export default function EditProfilePage() {
                 Country
               </label>
 
-              <input
-                type="text"
-                value={country}
-                onChange={(e) =>
-                  setCountry(
-                    e.target.value
-                  )
-                }
-                placeholder="Country"
+              <select
+  value={country}
+  onChange={(e) =>
+    setCountry(e.target.value)
+  }
+  className="
+    w-full
+    bg-[#353C72]
+    rounded-2xl
+    p-4
+    outline-none
+  "
+>
+  <option value="">
+    Select your country
+  </option>
 
-                className="
-                  w-full
-                  bg-[#353C72]
-                  rounded-2xl
-                  p-4
-                  outline-none
-                "
-              />
+  {countryOptions.map((country) => (
+    <option
+      key={country}
+      value={country}
+    >
+      {country}
+    </option>
+  ))}
+
+</select>
 
             </div>
 
@@ -324,38 +421,77 @@ export default function EditProfilePage() {
                 Financial Situation
               </label>
 
-              <select
-                value={financialSituation}
-                onChange={(e) =>
-                  setFinancialSituation(
-                    e.target.value
-                  )
-                }
-                className="
-                  w-full
-                  bg-[#353C72]
-                  rounded-2xl
-                  p-4
-                  outline-none
-                "
-              >
-                <option value="">
-                  Select Financial Situation
-                </option>
+            <div className="space-y-4">
 
-                <option value="Need Scholarship Support">
-                  Need Scholarship Support
-                </option>
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !financialSituations.includes(e.target.value)
+      ) {
+        setFinancialSituations([
+          ...financialSituations,
+          e.target.value,
+        ]);
+      }
 
-                <option value="Moderate Support Needed">
-                  Moderate Support Needed
-                </option>
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select Financial Situation
+    </option>
 
-                <option value="No Financial Support Needed">
-                  No Financial Support Needed
-                </option>
+    {financialOptions.map((option) => (
+      <option
+        key={option}
+        value={option}
+      >
+        {option}
+      </option>
+    ))}
 
-              </select>
+  </select>
+
+  <div className="flex flex-wrap gap-3">
+
+    {financialSituations.map((option) => (
+
+      <button
+        key={option}
+        type="button"
+        onClick={() =>
+          setFinancialSituations(
+            financialSituations.filter(
+              (item) => item !== option
+            )
+          )
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          hover:opacity-80
+          transition
+        "
+      >
+        {option} ✕
+      </button>
+
+    ))}
+
+  </div>
+
+</div>
 
             </div>
 

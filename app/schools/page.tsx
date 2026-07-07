@@ -9,30 +9,31 @@ export default function SchoolsPage() {
 
       <main className="min-h-screen bg-[#353C72] overflow-hidden">
 
-        <section className="py-24 px-6">
+        <section className="py-20 px-6">
 
           <div className="max-w-5xl mx-auto">
 
             <div
               className="
                 bg-[#6C9BD5]
-rounded-[40px]
-border-4
-border-[#F4C3D5]
-shadow-[0_25px_60px_rgba(0,0,0,0.35)]
-px-16
-py-20
-text-center
+                rounded-[40px]
+                border-4
+                border-[#F4C3D5]
+                shadow-[0_25px_60px_rgba(0,0,0,0.35)]
+                px-8
+                md:px-14
+                py-16
+                md:py-18
+                text-center
               "
             >
 
-              {/* Badge */}
+              {/* Launch Badge */}
 
               <div
                 className="
                   inline-flex
                   items-center
-                  gap-3
                   bg-[#353C72]
                   text-[#F4C3D5]
                   rounded-full
@@ -40,21 +41,18 @@ text-center
                   py-4
                 "
               >
-                <span className="text-2xl">🚀</span>
 
                 <span
-                  className="
-                    text-[26px]
-                    font-bold
-                    tracking-wide
-                  "
+                  className="text-[22px] tracking-wide"
                   style={{
                     fontFamily:
                       '"Times New Roman MT Condensed","Times New Roman",serif',
+                    fontWeight: 500,
                   }}
                 >
                   LAUNCHING SOON
                 </span>
+
               </div>
 
               {/* Heading */}
@@ -62,15 +60,16 @@ text-center
               <h1
                 className="
                   mt-10
-                  text-[64px]
-                  md:text-[90px]
+                  text-[48px]
+                  sm:text-[56px]
+                  md:text-[72px]
                   leading-none
-                  font-semibold
                   text-[#353C72]
                 "
                 style={{
                   fontFamily:
                     '"Times New Roman MT Condensed","Times New Roman",serif',
+                  fontWeight: 500,
                 }}
               >
                 Coming{" "}
@@ -81,7 +80,7 @@ text-center
 
               {/* Divider */}
 
-              <div className="w-28 h-[4px] rounded-full bg-[#6C9BD5] mx-auto mt-8" />
+              <div className="w-24 h-[3px] rounded-full bg-[#353C72] mx-auto mt-8" />
 
               {/* Description */}
 
@@ -90,29 +89,25 @@ text-center
                   mt-10
                   max-w-3xl
                   mx-auto
-                  text-[24px]
-                  md:text-[28px]
-                  leading-[1.6]
+                  text-[19px]
+                  sm:text-[20px]
+                  md:text-[22px]
+                  leading-[1.7]
                   text-[#353C72]
                 "
                 style={{
                   fontFamily:
                     '"Times New Roman MT Condensed","Times New Roman",serif',
+                  fontWeight: 400,
                 }}
               >
                 We're building a dedicated experience for
                 educational institutions to help students
                 discover scholarships, competitions,
                 internships, leadership programs,
-                exchange opportunities and global
+                exchange opportunities, and global
                 experiences—all in one place.
               </p>
-
-              {/* Illustration */}
-
-              <div className="mt-16 text-[90px]">
-                🎓
-              </div>
 
               {/* Bottom Badge */}
 
@@ -120,31 +115,25 @@ text-center
                 className="
                   inline-flex
                   items-center
-                  gap-4
-                  mt-10
+                  mt-12
                   bg-[#353C72]
                   rounded-full
                   px-10
-                  py-5
+                  py-4
                 "
               >
-                <span className="text-2xl">
-                  🚀
-                </span>
 
                 <span
-                  className="
-                    text-[28px]
-                    font-semibold
-                    text-[#F4C3D5]
-                  "
+                  className="text-[22px] text-[#F4C3D5]"
                   style={{
                     fontFamily:
                       '"Times New Roman MT Condensed","Times New Roman",serif',
+                    fontWeight: 500,
                   }}
                 >
                   Stay Tuned
                 </span>
+
               </div>
 
             </div>
@@ -154,6 +143,7 @@ text-center
         </section>
 
       </main>
+
     </>
   );
 }

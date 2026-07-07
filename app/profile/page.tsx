@@ -183,19 +183,48 @@ export default function ProfilePage() {
 
               </div>
 
-              <div className="md:col-span-2">
+            <div className="md:col-span-2">
 
-                <p className="text-[#6C9BD5] uppercase text-sm">
-                  Financial Situation
-                </p>
+  <p className="text-[#6C9BD5] uppercase text-sm">
+    Financial Situation
+  </p>
 
-                <p className="text-2xl mt-2">
-                  {profile.financial_situation ||
-                    "Not Provided"}
-                </p>
+  {profile.financial_situations?.length ? (
 
-              </div>
+    <div className="flex flex-wrap gap-3 mt-4">
 
+      {profile.financial_situations.map(
+        (item: string) => (
+
+          <div
+            key={item}
+            className="
+              px-5
+              py-2
+              rounded-full
+              bg-[#44528A]
+              border
+              border-[#5A669A]
+              text-[#F8F8F4]
+            "
+          >
+            {item}
+          </div>
+
+        )
+      )}
+
+    </div>
+
+  ) : (
+
+    <p className="text-2xl mt-2">
+      Not Provided
+    </p>
+
+  )}
+
+</div>
             </div>
 
           </div>

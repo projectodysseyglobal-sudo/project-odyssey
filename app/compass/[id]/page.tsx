@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useParams, useRouter } from "next/navigation";
 import PublicNavbar from "@/components/PublicNavbar";
-
 export default function BlogDetailsPage() {
   const params = useParams();
   const router = useRouter();
 
   const [blog, setBlog] = useState<any>(null);
-
+  
   useEffect(() => {
     loadBlog();
   }, []);
@@ -26,7 +25,6 @@ export default function BlogDetailsPage() {
       setBlog(data);
     }
   }
-
   if (!blog) {
     return (
       <>
@@ -163,90 +161,71 @@ export default function BlogDetailsPage() {
         ======================================================== */}
 
         <section className="relative -mt-[1px] bg-[#6C9BD5] overflow-hidden">
-          <div className="max-w-7xl mx-auto px-8 py-16">
 
-            <div className="grid lg:grid-cols-[340px_1fr] gap-14">
+  <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 py-16">
 
-              {/* Image */}
+    <div
+      className="
+        text-[#F8F8F4]
+        text-[22px]
+        lg:text-[24px]
+        leading-[1.85]
+      "
+      style={{
+        fontFamily: '"Times New Roman", serif',
+      }}
+    >
 
-              <div>
+      {blog.image_url && (
 
-                {blog.image_url && (
+        <img
+          src={blog.image_url}
+          alt={blog.title}
+          className="
+            w-full
+            sm:w-[320px]
+            lg:w-[380px]
+            aspect-square
+            object-cover
+            rounded-[28px]
 
-                  <img
-                    src={blog.image_url}
-                    alt={blog.title}
-                    className="
-                      w-full
-                      aspect-square
-                      rounded-[28px]
-                      object-cover
-                    "
-                  />
+            float-none
+            sm:float-left
 
-                )}
+            mb-8
+            sm:mb-6
 
-              </div>
+            sm:mr-10
+          "
+        />
 
-              {/* First Paragraph */}
+      )}
 
-              <div>
+      {blog.content
+        ?.split("\n\n")
+        .map(
+          (
+            paragraph: string,
+            index: number
+          ) => (
 
-                <p
-                  className="
-                    text-[24px]
-                    leading-[1.8]
-                    text-[#F8F8F4]
-                  "
-                  style={{
-                    fontFamily:
-                      '"Times New Roman", serif',
-                  }}
-                >
-                  {
-                    blog.content
-                      ?.split("\n\n")[0]
-                  }
-                </p>
+            <p
+              key={index}
+              className="mb-8"
+            >
+              {paragraph}
+            </p>
 
-              </div>
+          )
+        )}
 
-            </div>
-                        {/* Remaining Content */}
+      <div className="clear-both" />
 
-            <div className="mt-20">
+    </div>
 
-              {blog.content
-                ?.split("\n\n")
-                .slice(1)
-                .map(
-                  (
-                    paragraph: string,
-                    index: number
-                  ) => (
-                    <p
-                      key={index}
-                      className="
-                        text-[24px]
-                        leading-[1.85]
-                        text-[#F8F8F4]
-                        mb-10
-                      "
-                      style={{
-                        fontFamily:
-                          '"Times New Roman", serif',
-                      }}
-                    >
-                      {paragraph}
-                    </p>
-                  )
-                )}
+  </div>
 
-            </div>
-
-          </div>
-
-        </section>
+</section>
 
         {/* ==========================================
             Bottom Wave
