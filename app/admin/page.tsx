@@ -90,8 +90,7 @@ export default function AdminPage() {
 today.setHours(0, 0, 0, 0);
 
 const todayString = today
-  .toLocaleDateString("en-CA"); // YYYY-MM-DD
-
+  .toLocaleDateString("en-CA"); 
 const {
   data: expired,
   error,
@@ -99,7 +98,6 @@ const {
   .from("opportunities")
   .select("id, deadline")
   .lte("deadline", todayString);
-
 console.log("Today:", todayString);
 console.log("Expired:", expired);
 console.log("Error:", error);

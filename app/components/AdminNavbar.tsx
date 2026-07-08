@@ -6,7 +6,7 @@ import {
   useRouter,
   usePathname,
 } from "next/navigation";
-
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 import {
@@ -116,54 +116,38 @@ export default function AdminNavbar() {
 
         {/* Logo */}
 
-        <Link
-          href="/admin"
-          onClick={() =>
-            setMenuOpen(false)
-          }
-          className="
-            flex
-            items-center
-            gap-4
-          "
-        >
+{/* Logo */}
 
-          <img
-            src="/door-2.png"
-            alt="Project Odyssey"
-            className="
-              w-10
-              lg:w-12
-            "
-          />
-
-          <div>
-
-            <h1
-              className="
-                text-lg
-                sm:text-xl
-                lg:text-2xl
-                text-[#F8F8F4]
-                font-semibold
-              "
-            >
-              PROJECT ODYSSEY
-            </h1>
-
-            <p
-              className="
-                text-[#A3C2E0]
-                text-xs
-                lg:text-sm
-              "
-            >
-              Admin Panel
-            </p>
-
-          </div>
-
-        </Link>
+<Link
+  href="/admin"
+  onClick={() => setMenuOpen(false)}
+  className="
+    flex
+    items-center
+    transition
+    duration-300
+    hover:opacity-90
+    shrink-0
+  "
+>
+  <Image
+    src="/logo-odyssey.png"
+    alt="Project Odyssey"
+    width={320}
+    height={55}
+    priority
+    className="
+      w-[180px]
+      sm:w-[220px]
+      md:w-[260px]
+      lg:w-[300px]
+      xl:w-[320px]
+      h-auto
+      object-contain
+      select-none
+    "
+  />
+</Link>
 
         {/* Desktop Navigation */}
 

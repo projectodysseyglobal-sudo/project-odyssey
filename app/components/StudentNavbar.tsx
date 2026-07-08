@@ -6,7 +6,7 @@ import {
   useRouter,
   usePathname,
 } from "next/navigation";
-
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 import {
@@ -135,35 +135,41 @@ export default function StudentNavbar() {
 
         {/* Logo */}
 
-        <Link
-          href="/dashboard"
-          onClick={() => {
+{/* Logo */}
 
-            setOpen(false);
-            setMobileOpen(false);
-
-          }}
-          className="
-            text-[24px]
-            sm:text-[28px]
-            lg:text-[34px]
-            font-semibold
-            tracking-[-0.03em]
-            leading-none
-            shrink-0
-          "
-        >
-
-          <span className="text-[#F8F8F4]">
-            PROJECT
-          </span>
-
-          <span className="text-[#6C9BD5]">
-            {" "}
-            ODYSSEY
-          </span>
-
-        </Link>
+<Link
+  href="/dashboard"
+  onClick={() => {
+    setOpen(false);
+    setMobileOpen(false);
+  }}
+  className="
+    flex
+    items-center
+    transition
+    duration-300
+    hover:opacity-90
+    shrink-0
+  "
+>
+  <Image
+    src="/logo-odyssey.png"
+    alt="Project Odyssey"
+    width={320}
+    height={55}
+    priority
+    className="
+      w-[180px]
+      sm:w-[220px]
+      md:w-[260px]
+      lg:w-[300px]
+      xl:w-[320px]
+      h-auto
+      object-contain
+      select-none
+    "
+  />
+</Link>
 
         {/* Desktop Navigation */}
 
@@ -268,7 +274,6 @@ export default function StudentNavbar() {
                   transition
                 "
               >
-
                 <User size={20} />
 
                 <span>
