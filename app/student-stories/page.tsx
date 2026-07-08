@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import PublicNavbar from "@/components/PublicNavbar";
-
+import Link from "next/link";
 export default function StudentStoriesPage() {
   const [stories, setStories] =
     useState<any[]>([]);
@@ -394,29 +394,34 @@ export default function StudentStoriesPage() {
       inspire another student?
     </p>
 
-    <button
-      className="
-        mt-10
-        w-full
-        sm:w-auto
-        bg-[#F4C3D5]
-        text-[#2F3B6F]
-        px-8
-        py-4
-        rounded-full
-        text-lg
-        sm:text-xl
-        font-bold
-        hover:bg-[#ffd5e3]
-        transition
-      "
-      style={{
-        fontFamily:
-          '"Times New Roman", serif',
-      }}
-    >
-      Share Your Story
-    </button>
+    <Link
+  href="https://docs.google.com/forms/d/e/1FAIpQLSdZOuhYbixuRvYR4IRZ988ht4Q-OZmdbtldXY-FryS2nCckzA/viewform"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    inline-block
+    mt-10
+    w-full
+    sm:w-auto
+    bg-[#F4C3D5]
+    text-[#2F3B6F]
+    px-8
+    py-4
+    rounded-full
+    text-center
+    text-lg
+    sm:text-xl
+    font-bold
+    hover:bg-[#ffd5e3]
+    transition
+  "
+  style={{
+    fontFamily:
+      '"Times New Roman", serif',
+  }}
+>
+  Share Your Story
+</Link>
 
     {/* Stories */}
 
