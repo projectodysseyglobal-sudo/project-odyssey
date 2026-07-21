@@ -25,21 +25,11 @@ export default function EditOpportunityPage({
     setDescription,
   ] = useState("");
 
-  const [category, setCategory] =
-  useState("");
+const [categories, setCategories] =
+  useState<string[]>([]);
 
-const [
-  customCategory,
-  setCustomCategory,
-] = useState("");
-
-const [subject, setSubject] =
-  useState("");
-
-const [
-  customSubject,
-  setCustomSubject,
-] = useState("");
+const [subjects, setSubjects] =
+  useState<string[]>([]);
   const [grade, setGrade] =
     useState("");
 
@@ -86,7 +76,77 @@ const [
     winningTips,
     setWinningTips,
   ] = useState("");
+const categoryOptions = [
+  "Award",
+  "Competition",
+  "Scholarship",
+  "Internship",
+  "Summer Program",
+  "Program",
+  "Research",
+  "Bootcamp",
+  "Conference",
+  "Workshop",
+  "Fellowship",
+  "Exchange Program",
+  "Volunteer",
+  "Hackathon",
+  "Course",
+  "Other",
+];
 
+const subjectOptions = [
+  "Medicine",
+  "Engineering",
+  "Business",
+  "Technology",
+  "Science",
+  "Research",
+  "Writing",
+  "Arts",
+  "Law",
+  "Economics",
+  "Artificial Intelligence",
+  "Coding",
+  "STEM",
+  "Community Service",
+  "Music",
+  "Photography",
+  "Debate & MUN",
+  "Public Speaking",
+  "Social Impact",
+  "Innovation",
+  "Environment",
+  "History",
+  "Mathematics",
+  "Other",
+];
+
+function toggleCategory(category: string) {
+  if (categories.includes(category)) {
+    setCategories(
+      categories.filter((c) => c !== category)
+    );
+  } else {
+    setCategories([
+      ...categories,
+      category,
+    ]);
+  }
+}
+
+function toggleSubject(subject: string) {
+  if (subjects.includes(subject)) {
+    setSubjects(
+      subjects.filter((s) => s !== subject)
+    );
+  } else {
+    setSubjects([
+      ...subjects,
+      subject,
+    ]);
+  }
+}
   useEffect(() => {
     async function loadOpportunity() {
 
@@ -107,55 +167,19 @@ const [
         data.description || ""
       );
 
-      const categoryList = [
-  "Research",
-  "Competition",
-  "Scholarship",
-  "Internship",
-  "Summer Program",
-  "Workshop",
-  "Bootcamp",
-  "Conference",
-  "Fellowship",
-  "Other",
-];
+setCategories(
+  (data.category || "")
+    .split(",")
+    .map((item: string) => item.trim())
+    .filter(Boolean)
+);
 
-if (
-  categoryList.includes(data.category)
-) {
-  setCategory(data.category);
-} else {
-  setCategory("Other");
-  setCustomCategory(
-    data.category || ""
-  );
-}
-
-const subjectList = [
-  "Medicine",
-  "Engineering",
-  "Science",
-  "Technology",
-  "Business",
-  "Law",
-  "Arts",
-  "Writing",
-  "Research",
-  "Entrepreneurship",
-  "Social Impact",
-  "Other"
-];
-
-if (
-  subjectList.includes(data.subject)
-) {
-  setSubject(data.subject);
-} else {
-  setSubject("Other");
-  setCustomSubject(
-    data.subject || ""
-  );
-}
+setSubjects(
+  (data.subject || "")
+    .split(",")
+    .map((item: string) => item.trim())
+    .filter(Boolean)
+);
       setGrade(
         data.grade || ""
       );
@@ -165,8 +189,10 @@ if (
       );
 
       setDeadline(
-        data.deadline || ""
-      );
+  data.deadline
+    ? data.deadline.split("T")[0]
+    : ""
+);
 
       setApplicationLink(
         data.application_link || ""
@@ -210,43 +236,26 @@ if (
   }, [id]);
 
   async function updateOpportunity() {
-    const finalCategory =
-  category === "Other"
-    ? customCategory
-    : category;
+    if (categories.length === 0) {
+  alert("Please select at least one category.");
+  return;
+}
 
-const finalSubject =
-  subject === "Other"
-    ? customSubject
-    : subject;
-      // Validation
-  if (
-    category === "Other" &&
-    !customCategory.trim()
-  ) {
-    alert("Please enter a custom category.");
-    return;
-  }
-
-  if (
-    subject === "Other" &&
-    !customSubject.trim()
-  ) {
-    alert("Please enter a custom subject.");
-    return;
-  }
-
+if (subjects.length === 0) {
+  alert("Please select at least one subject.");
+  return;
+}
     const { error } =
       await supabase
         .from("opportunities")
         .update({
           title,
           description,
-          category: finalCategory,
-          subject: finalSubject,
+          category: categories.join(", "),
+          subject: subjects.join(", "),
           grade,
           country,
-          deadline,
+          deadline: deadline || null,
           application_link:
             applicationLink,
           eligibility,
@@ -431,177 +440,147 @@ const finalSubject =
               className="w-full h-28 bg-[#353C72] rounded-2xl p-4 outline-none"
             />
 
-                        {/* Category */}
+                       {/* Category */}
 
-            <select
-  value={category}
-  onChange={(e) =>
-    setCategory(e.target.value)
-  }
-  className="
-    w-full
-    bg-[#353C72]
-    rounded-2xl
-    p-4
-    outline-none
-  "
->
-  <option value="">
-    Select Category
-  </option>
+<div className="space-y-4">
 
-  <option value="Research">
-    Research
-  </option>
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !categories.includes(e.target.value)
+      ) {
+        setCategories([
+          ...categories,
+          e.target.value,
+        ]);
+      }
 
-  <option value="Competition">
-    Competition
-  </option>
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select Category
+    </option>
 
-  <option value="Scholarship">
-    Scholarship
-  </option>
+    {categoryOptions.map((category) => (
+      <option
+        key={category}
+        value={category}
+      >
+        {category}
+      </option>
+    ))}
 
-  <option value="Internship">
-    Internship
-  </option>
+  </select>
 
-  <option value="Summer Program">
-    Summer Program
-  </option>
+  <div className="flex flex-wrap gap-3">
 
-  <option value="Workshop">
-    Workshop
-  </option>
+    {categories.map((category) => (
 
-  <option value="Bootcamp">
-    Bootcamp
-  </option>
+      <button
+        key={category}
+        type="button"
+        onClick={() =>
+          toggleCategory(category)
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          font-medium
+          hover:opacity-80
+          transition
+        "
+      >
+        {category} ✕
+      </button>
 
-  <option value="Conference">
-    Conference
-  </option>
+    ))}
 
-  <option value="Fellowship">
-    Fellowship
-  </option>
+  </div>
 
-  <option value="Other">
-    Other
-  </option>
+</div>
 
-</select>
+         {/* Subject */}
 
-{category === "Other" && (
+<div className="space-y-4">
 
-<input
-  placeholder="Custom Category"
-  value={customCategory}
-  onChange={(e) =>
-    setCustomCategory(
-      e.target.value
-    )
-  }
-  className="
-    w-full
-    bg-[#353C72]
-    rounded-2xl
-    p-4
-    outline-none
-  "
-/>
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !subjects.includes(e.target.value)
+      ) {
+        setSubjects([
+          ...subjects,
+          e.target.value,
+        ]);
+      }
 
-)}
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select Subject
+    </option>
 
-            {/* Subject */}
+    {subjectOptions.map((subject) => (
+      <option
+        key={subject}
+        value={subject}
+      >
+        {subject}
+      </option>
+    ))}
 
-            <select
-  value={subject}
-  onChange={(e) =>
-    setSubject(e.target.value)
-  }
-  className="
-    w-full
-    bg-[#353C72]
-    rounded-2xl
-    p-4
-    outline-none
-  "
->
-  <option value="">
-    Select Subject
-  </option>
+  </select>
 
-  <option value="Medicine">
-    Medicine
-  </option>
+  <div className="flex flex-wrap gap-3">
 
-  <option value="Engineering">
-    Engineering
-  </option>
+    {subjects.map((subject) => (
 
-  <option value="Science">
-    Science
-  </option>
+      <button
+        key={subject}
+        type="button"
+        onClick={() =>
+          toggleSubject(subject)
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          font-medium
+          hover:opacity-80
+          transition
+        "
+      >
+        {subject} ✕
+      </button>
 
-  <option value="Technology">
-    Technology
-  </option>
+    ))}
 
-  <option value="Business">
-    Business
-  </option>
+  </div>
 
-  <option value="Law">
-    Law
-  </option>
-
-  <option value="Arts">
-    Arts
-  </option>
-
-  <option value="Writing">
-    Writing
-  </option>
-
-  <option value="Research">
-    Research
-  </option>
-
-  <option value="Entrepreneurship">
-    Entrepreneurship
-  </option>
-
-  <option value="Social Impact">
-    Social Impact
-  </option>
-
-  <option value="Other">
-    Other
-  </option>
-
-</select>
-
-{subject === "Other" && (
-
-<input
-  placeholder="Custom Subject"
-  value={customSubject}
-  onChange={(e) =>
-    setCustomSubject(
-      e.target.value
-    )
-  }
-  className="
-    w-full
-    bg-[#353C72]
-    rounded-2xl
-    p-4
-    outline-none
-  "
-/>
-
-)}
+</div>
             {/* Grade */}
 
             <input

@@ -11,18 +11,14 @@ import {
   Pencil,
   Trash2,
 } from "lucide-react";
-
 export default function AdminOpportunities() {
   const [opportunities, setOpportunities] =
     useState<any[]>([]);
-
   const [search, setSearch] =
     useState("");
-
   useEffect(() => {
     loadOpportunities();
   }, []);
-
   async function loadOpportunities() {
     const { data } = await supabase
       .from("opportunities")
@@ -30,47 +26,40 @@ export default function AdminOpportunities() {
       .order("created_at", {
         ascending: false,
       });
-
     setOpportunities(data || []);
   }
-
   async function deleteOpportunity(
     id: number
   ) {
     const confirmed = confirm(
       "Delete this opportunity?"
     );
-
     if (!confirmed) return;
-
     const { error } = await supabase
       .from("opportunities")
       .delete()
       .eq("id", id);
-
     if (error) {
       alert(error.message);
       return;
     }
-
     loadOpportunities();
   }
-
   const filtered =
     opportunities.filter((item) => {
       const keyword =
         search.toLowerCase();
-
       return (
         item.title
           ?.toLowerCase()
           .includes(keyword) ||
-        item.category
-          ?.toLowerCase()
-          .includes(keyword) ||
-        item.subject
-          ?.toLowerCase()
-          .includes(keyword)
+       item.category
+  ?.toLowerCase()
+  .includes(keyword) ||
+
+item.subject
+  ?.toLowerCase()
+  .includes(keyword)
       );
     });
 
@@ -227,9 +216,24 @@ export default function AdminOpportunities() {
 
             filtered.map((item) => {
 
-              const isOpen =
-                new Date(item.deadline) >=
-                new Date();
+              const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const deadlineDate = item.deadline
+  ? new Date(item.deadline)
+  : null;
+
+if (
+  deadlineDate &&
+  !isNaN(deadlineDate.getTime())
+) {
+  deadlineDate.setHours(0, 0, 0, 0);
+}
+
+const isOpen =
+  deadlineDate !== null &&
+  !isNaN(deadlineDate?.getTime()) &&
+  deadlineDate >= today;
 
               return (
 
@@ -275,27 +279,49 @@ export default function AdminOpportunities() {
                         "
                       >
 
-                        <span
-                          className="
-                            bg-[#353C72]
-                            px-4
-                            py-2
-                            rounded-full
-                          "
-                        >
-                          {item.category}
-                        </span>
+                        <div className="flex flex-wrap gap-2">
 
-                        <span
-                          className="
-                            bg-[#353C72]
-                            px-4
-                            py-2
-                            rounded-full
-                          "
-                        >
-                          {item.subject}
-                        </span>
+  {(item.category || "")
+    .split(",")
+    .map((category: string) => (
+
+      <span
+        key={category}
+        className="
+          bg-[#353C72]
+          px-4
+          py-2
+          rounded-full
+        "
+      >
+        {category.trim()}
+      </span>
+
+    ))}
+
+</div>
+
+                        <div className="flex flex-wrap gap-2">
+
+  {(item.subject || "")
+    .split(",")
+    .map((subject: string) => (
+
+      <span
+        key={subject}
+        className="
+          bg-[#353C72]
+          px-4
+          py-2
+          rounded-full
+        "
+      >
+        {subject.trim()}
+      </span>
+
+    ))}
+
+</div>
 
                       </div>
 
@@ -318,30 +344,32 @@ export default function AdminOpportunities() {
                         </span>
 
                         <span>
-                          {new Date(
-                            item.deadline
-                          ).toLocaleDateString(
-                            "en-GB"
-                          )}
-                        </span>
+  {deadlineDate
+    ? deadlineDate.toLocaleDateString("en-GB")
+    : "No Deadline"}
+</span>
 
                         <span
                           className={`
-                            ml-4
-                            px-4
-                            py-1
-                            rounded-full
-                            text-sm
-                            ${
-                              isOpen
-                                ? "bg-green-600"
-                                : "bg-red-600"
-                            }
-                          `}
+  ml-4
+  px-4
+  py-1
+  rounded-full
+  text-sm
+  ${
+    !deadlineDate
+      ? "bg-gray-600"
+      : isOpen
+      ? "bg-green-600"
+      : "bg-red-600"
+  }
+`}
                         >
-                          {isOpen
-                            ? "Open"
-                            : "Closed"}
+                         {!deadlineDate
+  ? "No Deadline"
+  : isOpen
+  ? "Open"
+  : "Closed"}
                         </span>
 
                       </div>

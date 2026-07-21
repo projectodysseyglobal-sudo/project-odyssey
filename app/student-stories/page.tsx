@@ -89,9 +89,7 @@ export default function StudentStoriesPage() {
         >
           Odysseans.
         </span>
-
       </h1>
-
       <p
         className="
           mt-8
@@ -370,7 +368,6 @@ export default function StudentStoriesPage() {
       </span>
 
     </h2>
-
     <p
       className="
         mt-6

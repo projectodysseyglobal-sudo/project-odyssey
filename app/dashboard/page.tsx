@@ -24,35 +24,48 @@ export default function Dashboard() {
       setProfile(profileData);
 console.log("PROFILE:", profileData);
 console.log("INTERESTS:", profileData?.interests);
-const { data: allOpportunities } =
+
+   const { data: allOpportunities, error } =
   await supabase
     .from("opportunities")
-    .select("title, subject, category");
-console.log(
-  "ALL OPPORTUNITIES:",
-  allOpportunities
-);
-    const { data: recommendedData, error } =
-  await supabase
-    .from("opportunities")
-    .select("*")
-    .in(
-  "subject",
-  profileData.interests || []
-);
+    .select("*");
+
 console.log(
   "INTERESTS:",
   profileData.interests
 );
+
 console.log(
-  "RECOMMENDED DATA:",
-  recommendedData
+  "ALL OPPORTUNITIES:",
+  allOpportunities
 );
+
 console.log(
   "RECOMMENDATION ERROR:",
   error
 );
-setRecommended(recommendedData || []);
+const recommendedData =
+  (allOpportunities || []).filter(
+    (opportunity) => {
+
+      const subjects =
+        (opportunity.subject || "")
+          .split(",")
+          .map((subject: string) =>
+            subject.trim().toLowerCase()
+          );
+
+      return (
+        profileData.interests || []
+      ).some((interest: string) =>
+        subjects.includes(
+          interest.toLowerCase()
+        )
+      );
+    }
+  );
+
+setRecommended(recommendedData);
 const { data: savedData } = await supabase
   .from("saved_opportunities")
   .select(`

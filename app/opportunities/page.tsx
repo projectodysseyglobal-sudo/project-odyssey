@@ -53,14 +53,18 @@ export default function OpportunitiesPage() {
         setFiltered(data);
 
         // Generate categories dynamically
-        const uniqueCategories = [
-          "All",
-          ...new Set(
-            data
-              .map((item) => item.category)
-              .filter(Boolean)
-          ),
-        ];
+       const uniqueCategories = [
+  "All",
+  ...new Set(
+    data
+      .flatMap((item) =>
+        item.category
+          ?.split(",")
+          .map((c: string) => c.trim())
+      )
+      .filter(Boolean)
+  ),
+];
 
         setCategories(uniqueCategories);
       }
@@ -74,28 +78,47 @@ export default function OpportunitiesPage() {
     let results = opportunities;
 
     if (selectedCategory !== "All") {
-      results = results.filter(
-        (item) =>
-          item.category ===
-          selectedCategory
-      );
-    }
+  results = results.filter((item) =>
+    item.category
+      ?.split(",")
+      .map((c) => c.trim())
+      .includes(selectedCategory)
+  );
+}
 
     if (search.trim()) {
-      results = results.filter(
-        (item) =>
-          item.title
-            .toLowerCase()
-            .includes(
-              search.toLowerCase()
-            ) ||
-          item.subject
-            .toLowerCase()
-            .includes(
-              search.toLowerCase()
-            )
-      );
-    }
+  const query = search.toLowerCase();
+
+  results = results.filter((item) => {
+    const titleMatch =
+      item.title
+        ?.toLowerCase()
+        .includes(query);
+
+    const subjectMatch =
+      item.subject
+        ?.toLowerCase()
+        .split(",")
+        .map((s) => s.trim())
+        .some((s) =>
+          s.includes(query)
+        );
+
+    const categoryMatch =
+      item.category
+        ?.toLowerCase()
+        .split(",")
+        .map((c) => c.trim())
+        .some((c) =>
+          c.includes(query)
+        );
+    return (
+      titleMatch ||
+      subjectMatch ||
+      categoryMatch
+    );
+  });
+}
 
     setFiltered(results);
   }, [
@@ -147,13 +170,9 @@ export default function OpportunitiesPage() {
               Every journey begins
               with curiosity.
             </p>
-
           </div>
-
           {/* Search */}
-
           <div className="mt-14">
-
             <input
               type="text"
               placeholder="Search opportunities..."
@@ -175,11 +194,8 @@ export default function OpportunitiesPage() {
                 text-xl
               "
             />
-
           </div>
-
           {/* Categories */}
-
           <div
   className="
     flex

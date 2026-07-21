@@ -17,13 +17,15 @@ export default function OpportunityDoor({
   subject,
   deadline,
 }: Props) {
-  const formattedDeadline = deadline
+ const formattedDeadline =
+  deadline &&
+  !isNaN(new Date(deadline).getTime())
     ? new Date(deadline).toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
         year: "numeric",
       })
-    : "";
+    : "No Deadline";
 
   return (
     <Link href={`/opportunities/${id}`} className="block">
@@ -74,15 +76,61 @@ export default function OpportunityDoor({
               {title}
             </h2>
 
-            <p className="mt-4 text-[#A3C2E0]">
-              {category}
-            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
 
-            {subject && (
-              <p className="text-[#A3C2E0]">
-                {subject}
-              </p>
-            )}
+  {(category || "")
+    .split(",")
+    .map((item: string) => (
+
+      <span
+        key={item}
+        className="
+          px-3
+          py-1
+          rounded-full
+          bg-[#6C9BD5]/20
+          text-[#A3C2E0]
+          text-sm
+          border
+          border-[#6C9BD5]/40
+        "
+      >
+        {item.trim()}
+      </span>
+
+    ))}
+
+</div>
+
+           {subject && (
+
+  <div className="mt-3 flex flex-wrap gap-2">
+
+    {subject
+      .split(",")
+      .map((item: string) => (
+
+        <span
+          key={item}
+          className="
+            px-3
+            py-1
+            rounded-full
+            bg-[#F4C3D5]/20
+            text-[#F4C3D5]
+            text-sm
+            border
+            border-[#F4C3D5]/40
+          "
+        >
+          {item.trim()}
+        </span>
+
+      ))}
+
+  </div>
+
+)}
 
             <div className="mt-8">
 

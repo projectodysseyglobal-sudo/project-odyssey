@@ -11,104 +11,153 @@ export default function NewOpportunityPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [category, setCategory] = useState("");
-  const [customCategory, setCustomCategory] =
+  // Multi-select Categories
+  const [categories, setCategories] = useState<string[]>([]);
+
+  // Multi-select Subjects
+  const [subjects, setSubjects] = useState<string[]>([]);
+
+  const [grade, setGrade] = useState("");
+
+  const [country, setCountry] = useState("");
+
+  const [deadline, setDeadline] = useState("");
+
+  const [applicationLink, setApplicationLink] =
     useState("");
-
-  const [subject, setSubject] =
-    useState("");
-
-  const [customSubject, setCustomSubject] =
-    useState("");
-
-  const [grade, setGrade] =
-    useState("All");
-
-  const [country, setCountry] =
-    useState("Global");
-
-  const [deadline, setDeadline] =
-    useState("");
-
-  const [
-    applicationLink,
-    setApplicationLink,
-  ] = useState("");
 
   const [featured, setFeatured] =
     useState(false);
 
-  const [
-    eligibility,
-    setEligibility,
-  ] = useState("");
+  const [eligibility, setEligibility] =
+    useState("");
 
-  const [
-    applicationProcess,
-    setApplicationProcess,
-  ] = useState("");
+  const [applicationProcess, setApplicationProcess] =
+    useState("");
 
-  const [
-    applicationGuidance,
-    setApplicationGuidance,
-  ] = useState("");
+  const [applicationGuidance, setApplicationGuidance] =
+    useState("");
 
   const [benefits, setBenefits] =
     useState("");
 
-  const [
-    howToApply,
-    setHowToApply,
-  ] = useState("");
+  const [howToApply, setHowToApply] =
+    useState("");
 
-  const [
-    selectionProcess,
-    setSelectionProcess,
-  ] = useState("");
+  const [selectionProcess, setSelectionProcess] =
+    useState("");
 
-  const [
-    winningTips,
-    setWinningTips,
-  ] = useState("");
+  const [winningTips, setWinningTips] =
+    useState("");
+
+  // Available Categories
+
+  const categoryOptions = [
+    "Award",
+    "Competition",
+    "Scholarship",
+    "Internship",
+    "Summer Program",
+    "Program",
+    "Research",
+    "Bootcamp",
+    "Conference",
+    "Workshop",
+    "Fellowship",
+    "Exchange Program",
+    "Volunteer",
+    "Hackathon",
+    "Course",
+    "Other",
+  ];
+
+  // Available Subjects
+
+  const subjectOptions = [
+    "Medicine",
+    "Engineering",
+    "Business",
+    "Technology",
+    "Science",
+    "Research",
+    "Writing",
+    "Arts",
+    "Law",
+    "Economics",
+    "Artificial Intelligence",
+    "Coding",
+    "STEM",
+    "Community Service",
+    "Music",
+    "Photography",
+    "Debate & MUN",
+    "Public Speaking",
+    "Social Impact",
+    "Innovation",
+    "Environment",
+    "History",
+    "Mathematics",
+    "Other",
+  ];
+
+  function toggleCategory(category: string) {
+    if (categories.includes(category)) {
+      setCategories(
+        categories.filter(
+          (c) => c !== category
+        )
+      );
+    } else {
+      setCategories([
+        ...categories,
+        category,
+      ]);
+    }
+  }
+
+  function toggleSubject(subject: string) {
+    if (subjects.includes(subject)) {
+      setSubjects(
+        subjects.filter(
+          (s) => s !== subject
+        )
+      );
+    } else {
+      setSubjects([
+        ...subjects,
+        subject,
+      ]);
+    }
+  }
 
   async function createOpportunity() {
 
-    const finalCategory =
-      category === "Other"
-        ? customCategory
-        : category;
+    if (!title.trim()) {
+      alert("Please enter a title.");
+      return;
+    }
 
-    const finalSubject =
-      subject === "Other"
-        ? customSubject
-        : subject;
-     // Validation
-  if (
-    category === "Other" &&
-    !customCategory.trim()
-  ) {
-    alert("Please enter a custom category.");
-    return;
-  }
+    if (categories.length === 0) {
+      alert("Please select at least one category.");
+      return;
+    }
 
-  if (
-    subject === "Other" &&
-    !customSubject.trim()
-  ) {
-    alert("Please enter a custom subject.");
-    return;
-  }
+    if (subjects.length === 0) {
+      alert("Please select at least one subject.");
+      return;
+    }
+
     const { error } =
       await supabase
         .from("opportunities")
         .insert({
           title,
           description,
-          category: finalCategory,
-          subject: finalSubject,
+          category: categories.join(", "),
+          subject: subjects.join(", "),
           grade,
           country,
-          deadline,
+          deadline: deadline || null,
           application_link:
             applicationLink,
           featured,
@@ -139,7 +188,6 @@ export default function NewOpportunityPage() {
       "/admin/opportunities"
     );
   }
-
   return (
     <>
       <AdminNavbar />
@@ -354,142 +402,179 @@ export default function NewOpportunityPage() {
               "
             />
 
-                        {/* Category */}
+{/* Category */}
 
-            <select
-              value={category}
-              onChange={(e) =>
-                setCategory(e.target.value)
-              }
-              className="
-                w-full
-                bg-[#353C72]
-                rounded-2xl
-                p-4
-                outline-none
-              "
-            >
-              <option value="">Select Category</option>
-              <option value="Research">Research</option>
-              <option value="Competition">Competition</option>
-              <option value="Scholarship">Scholarship</option>
-              <option value="Internship">Internship</option>
-              <option value="Summer Program">Summer Program</option>
-              <option value="Workshop">Workshop</option>
-              <option value="Bootcamp">Bootcamp</option>
-              <option value="Conference">Conference</option>
-              <option value="Fellowship">Fellowship</option>
-              <option value="Other">Other</option>
-            </select>
+<div className="space-y-4">
 
-            {category === "Other" && (
-              <input
-                placeholder="Custom Category"
-                value={customCategory}
-                onChange={(e) =>
-                  setCustomCategory(e.target.value)
-                }
-                className="
-                  w-full
-                  bg-[#353C72]
-                  rounded-2xl
-                  p-4
-                  outline-none
-                "
-              />
-            )}
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !categories.includes(e.target.value)
+      ) {
+        setCategories([
+          ...categories,
+          e.target.value,
+        ]);
+      }
 
-            {/* Subject */}
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select Category
+    </option>
 
-            <select
-              value={subject}
-              onChange={(e) =>
-                setSubject(e.target.value)
-              }
-              className="
-                w-full
-                bg-[#353C72]
-                rounded-2xl
-                p-4
-                outline-none
-              "
-            >
-              <option value="">Select Subject</option>
-              <option value="Medicine">Medicine</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Science">Science</option>
-              <option value="Technology">Technology</option>
-              <option value="Business">Business</option>
-              <option value="Law">Law</option>
-              <option value="Arts">Arts</option>
-              <option value="Writing">Writing</option>
-              <option value="Research">Research</option>
-              <option value="Entrepreneurship">Entrepreneurship</option>
-              <option value="Social Impact">Social Impact</option>
-              <option value="Other">Other</option>
-            </select>
+    {categoryOptions.map((category) => (
+      <option
+        key={category}
+        value={category}
+      >
+        {category}
+      </option>
+    ))}
 
-            {subject === "Other" && (
-              <input
-                placeholder="Custom Subject"
-                value={customSubject}
-                onChange={(e) =>
-                  setCustomSubject(e.target.value)
-                }
-                className="
-                  w-full
-                  bg-[#353C72]
-                  rounded-2xl
-                  p-4
-                  outline-none
-                "
-              />
-            )}
+  </select>
 
-            {/* Grade */}
+  <div className="flex flex-wrap gap-3">
 
-            <select
-              value={grade}
-              onChange={(e) =>
-                setGrade(e.target.value)
-              }
-              className="
-                w-full
-                bg-[#353C72]
-                rounded-2xl
-                p-4
-                outline-none
-              "
-            >
-              <option value="All">All Grades</option>
-              <option value="9">Grade 9</option>
-              <option value="10">Grade 10</option>
-              <option value="11">Grade 11</option>
-              <option value="12">Grade 12</option>
-              <option>College</option>
-              <option>University</option>
-              <option>Graduate</option>
-            </select>
+    {categories.map((category) => (
 
-            {/* Country */}
+      <button
+        key={category}
+        type="button"
+        onClick={() =>
+          toggleCategory(category)
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          font-medium
+          hover:opacity-80
+          transition
+        "
+      >
+        {category} ✕
+      </button>
 
-            <input
-              placeholder="Country"
-              value={country}
-              onChange={(e) =>
-                setCountry(e.target.value)
-              }
-              className="
-                w-full
-                bg-[#353C72]
-                rounded-2xl
-                p-4
-                outline-none
-              "
-            />
+    ))}
 
+  </div>
+
+</div>
+
+{/* Subject */}
+
+<div className="space-y-4">
+
+  <select
+    onChange={(e) => {
+      if (
+        e.target.value &&
+        !subjects.includes(e.target.value)
+      ) {
+        setSubjects([
+          ...subjects,
+          e.target.value,
+        ]);
+      }
+
+      e.target.selectedIndex = 0;
+    }}
+    className="
+      w-full
+      bg-[#353C72]
+      rounded-2xl
+      p-4
+      outline-none
+    "
+  >
+    <option value="">
+      Select Subject
+    </option>
+
+    {subjectOptions.map((subject) => (
+      <option
+        key={subject}
+        value={subject}
+      >
+        {subject}
+      </option>
+    ))}
+
+  </select>
+
+  <div className="flex flex-wrap gap-3">
+
+    {subjects.map((subject) => (
+
+      <button
+        key={subject}
+        type="button"
+        onClick={() =>
+          toggleSubject(subject)
+        }
+        className="
+          bg-[#F4C3D5]
+          text-[#353C72]
+          px-4
+          py-2
+          rounded-full
+          font-medium
+          hover:opacity-80
+          transition
+        "
+      >
+        {subject} ✕
+      </button>
+    ))}
+  </div>
+</div>
+
+{/* Grade */}
+<input
+  type="text"
+  placeholder="e.g. 7-12, University"
+  value={grade}
+  onChange={(e) =>
+    setGrade(e.target.value)
+  }
+  className="
+    w-full
+    bg-[#353C72]
+    rounded-2xl
+    p-4
+    outline-none
+  "
+/>
+
+{/* Country */}
+<input
+  type="text"
+  placeholder="e.g. Canada, Global, Canada, United States"
+  value={country}
+  onChange={(e) =>
+    setCountry(e.target.value)
+  }
+  className="
+    w-full
+    bg-[#353C72]
+    rounded-2xl
+    p-4
+    outline-none
+  "
+/>
             {/* Deadline */}
-
             <input
               type="date"
               value={deadline}
@@ -504,9 +589,7 @@ export default function NewOpportunityPage() {
                 outline-none
               "
             />
-
             {/* Application Link */}
-
             <input
               placeholder="Application Link"
               value={applicationLink}
@@ -523,9 +606,7 @@ export default function NewOpportunityPage() {
                 outline-none
               "
             />
-
             {/* Featured */}
-
             <label
               className="
                 flex

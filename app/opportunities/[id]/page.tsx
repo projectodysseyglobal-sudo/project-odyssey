@@ -96,8 +96,24 @@ export default function OpportunityDetail({
     );
   }
 
-  const isOpen =
-    new Date(opportunity.deadline) >= new Date();
+  const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const deadlineDate = opportunity.deadline
+  ? new Date(opportunity.deadline)
+  : null;
+
+if (
+  deadlineDate &&
+  !isNaN(deadlineDate.getTime())
+) {
+  deadlineDate.setHours(0, 0, 0, 0);
+}
+
+const isOpen =
+  deadlineDate !== null &&
+  !isNaN(deadlineDate.getTime()) &&
+  deadlineDate >= today;
 
   return (
     <>
@@ -180,9 +196,31 @@ export default function OpportunityDetail({
               <p className="text-[#6C9BD5] uppercase text-sm">
                 Category
               </p>
-              <h3 className="text-2xl mt-2">
-                {opportunity.category}
-              </h3>
+              <div className="flex flex-wrap gap-2 mt-3">
+
+  {(opportunity.category || "")
+    .split(",")
+    .map((category: string) => (
+
+      <span
+        key={category}
+        className="
+          bg-[#353C72]
+          border
+          border-[#6C9BD5]
+          text-[#F8F8F4]
+          px-4
+          py-2
+          rounded-full
+          text-sm
+        "
+      >
+        {category.trim()}
+      </span>
+
+    ))}
+
+</div>
             </div>
 
             <div className="bg-[#2A2F72] rounded-3xl p-6">
@@ -190,9 +228,31 @@ export default function OpportunityDetail({
               <p className="text-[#6C9BD5] uppercase text-sm">
                 Subject
               </p>
-              <h3 className="text-2xl mt-2">
-                {opportunity.subject}
-              </h3>
+              <div className="flex flex-wrap gap-2 mt-3">
+
+  {(opportunity.subject || "")
+    .split(",")
+    .map((subject: string) => (
+
+      <span
+        key={subject}
+        className="
+          bg-[#353C72]
+          border
+          border-[#6C9BD5]
+          text-[#F8F8F4]
+          px-4
+          py-2
+          rounded-full
+          text-sm
+        "
+      >
+        {subject.trim()}
+      </span>
+
+    ))}
+
+</div>
             </div>
 
             <div className="bg-[#2A2F72] rounded-3xl p-6">
@@ -221,8 +281,10 @@ export default function OpportunityDetail({
                 Deadline
               </p>
               <h3 className="text-2xl mt-2">
-                {opportunity.deadline}
-              </h3>
+  {deadlineDate
+    ? deadlineDate.toLocaleDateString("en-GB")
+    : "No Deadline"}
+</h3>
             </div>
 
             <div className="bg-[#2A2F72] rounded-3xl p-6">
@@ -233,12 +295,18 @@ export default function OpportunityDetail({
 
               <span
                 className={`inline-block mt-3 px-5 py-2 rounded-full ${
-                  isOpen
-                    ? "bg-green-600"
-                    : "bg-red-600"
-                }`}
+  !deadlineDate
+    ? "bg-gray-600"
+    : isOpen
+    ? "bg-green-600"
+    : "bg-red-600"
+}`}
               >
-                {isOpen ? "Open" : "Closed"}
+                {!deadlineDate
+  ? "No Deadline"
+  : isOpen
+  ? "Open"
+  : "Closed"}
               </span>
             </div>
 
