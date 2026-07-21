@@ -120,7 +120,7 @@ export default function AdminBlogsPage() {
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
@@ -129,10 +129,25 @@ export default function AdminBlogsPage() {
             <img
               src="/door-2.png"
               alt="Door"
-              className="w-28 mx-auto"
+              className="
+  w-20
+  sm:w-24
+  md:w-28
+  mx-auto
+"
             />
 
-            <h1 className="text-7xl mt-8">
+            <h1
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
 
               MANAGE
 
@@ -143,7 +158,17 @@ export default function AdminBlogsPage() {
 
             </h1>
 
-            <p className="mt-6 text-2xl italic text-[#A3C2E0]">
+           <p
+  className="
+    mt-4
+    sm:mt-6
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    italic
+    text-[#A3C2E0]
+  "
+>
 
               Share inspiring stories and
               valuable knowledge with
@@ -366,16 +391,16 @@ export default function AdminBlogsPage() {
                     <Link
                       href={`/admin/blogs/edit/${blog.id}`}
                       className="
-                        flex
-                        items-center
-                        gap-2
-                        bg-[#6C9BD5]
-                        px-6
-                        py-3
-                        rounded-full
-                        hover:scale-105
-                        transition
-                      "
+  flex
+  items-center
+  gap-2
+  bg-[#6C9BD5]
+  px-6
+  py-3
+  rounded-full
+  hover:scale-105
+  transition
+"
                     >
 
                       <Pencil size={18} />
@@ -389,16 +414,18 @@ export default function AdminBlogsPage() {
                         deleteBlog(blog.id)
                       }
                       className="
-                        flex
-                        items-center
-                        gap-2
-                        bg-red-500
-                        px-6
-                        py-3
-                        rounded-full
-                        hover:bg-red-600
-                        transition
-                      "
+  flex
+  justify-center
+  items-center
+  gap-2
+  bg-red-500
+  px-5
+  sm:px-6
+  py-3
+  rounded-full
+  hover:bg-red-600
+  transition
+"
                     >
 
                       <Trash2 size={18} />

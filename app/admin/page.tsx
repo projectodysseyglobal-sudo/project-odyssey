@@ -160,24 +160,34 @@ setExpiredCount(expired?.length ?? 0);
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
           <div className="text-center">
 
             <img
-              src="/door-2.png"
-              alt="Door"
-              className="w-28 mx-auto"
-            />
+  src="/door-2.png"
+  alt="Door"
+  className="
+    w-20
+    sm:w-24
+    md:w-28
+    mx-auto
+  "
+/>
 
             <h1
-              className="
-                text-7xl
-                mt-8
-              "
-            >
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
               ADMIN
               <span className="text-[#6C9BD5]">
                 {" "}
@@ -185,13 +195,16 @@ setExpiredCount(expired?.length ?? 0);
               </span>
             </h1>
             <p
-              className="
-                mt-6
-                text-2xl
-                italic
-                text-[#A3C2E0]
-              "
-            >
+  className="
+    mt-4
+    sm:mt-6
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    italic
+    text-[#A3C2E0]
+  "
+>
               Manage every opportunity,
               every story, every student.
             </p>
@@ -199,7 +212,12 @@ setExpiredCount(expired?.length ?? 0);
           {/* Statistics */}
 
           <div className="grid lg:grid-cols-4 gap-8 mt-20">
-            <div className="bg-[#2A2F72] rounded-[30px] p-8">
+            <div className="
+  bg-[#2A2F72]
+  rounded-[30px]
+  p-6
+  sm:p-8
+">
               <Users
                 size={34}
                 className="text-[#F4C3D5]"
@@ -209,11 +227,23 @@ setExpiredCount(expired?.length ?? 0);
                 Students
               </p>
 
-              <h2 className="text-5xl mt-2">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    mt-2
+  "
+>
                 {studentsCount}
               </h2>
             </div>
-            <div className="bg-[#2A2F72] rounded-[30px] p-8">
+            <div className="
+  bg-[#2A2F72]
+  rounded-[30px]
+  p-6
+  sm:p-8
+">
 
               <Briefcase
                 size={34}
@@ -224,13 +254,25 @@ setExpiredCount(expired?.length ?? 0);
                 Opportunities
               </p>
 
-              <h2 className="text-5xl mt-2">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    mt-2
+  "
+>
                 {opportunitiesCount}
               </h2>
 
             </div>
 
-            <div className="bg-[#2A2F72] rounded-[30px] p-8">
+            <div className="
+  bg-[#2A2F72]
+  rounded-[30px]
+  p-6
+  sm:p-8
+">
 
               <BookOpen
                 size={34}
@@ -241,16 +283,29 @@ setExpiredCount(expired?.length ?? 0);
                 Blogs
               </p>
 
-              <h2 className="text-5xl mt-2">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    mt-2
+  "
+>
                 {blogsCount}
               </h2>
 
             </div>
 
-            <div className="bg-[#2A2F72] rounded-[30px] p-8">
+            <div className="
+  bg-[#2A2F72]
+  rounded-[30px]
+  p-6
+  sm:p-8
+">
 
               <Clock3
                 size={34}
+
                 className="text-[#F4C3D5]"
               />
 
@@ -258,7 +313,14 @@ setExpiredCount(expired?.length ?? 0);
                 Expired
               </p>
 
-              <h2 className="text-5xl mt-2">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    mt-2
+  "
+>
                 {expiredCount}
               </h2>
 
@@ -270,11 +332,26 @@ setExpiredCount(expired?.length ?? 0);
 
           <section className="mt-20">
 
-            <h2 className="text-4xl mb-10">
+            <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    mb-8
+    sm:mb-10
+  "
+>
               Quick Actions
             </h2>
-            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-
+<div
+  className="
+    grid
+    grid-cols-1
+    sm:grid-cols-2
+    xl:grid-cols-4
+    gap-6
+    sm:gap-8
+  "
+>
               <Link
                 href="/admin/opportunities"
                 className="
@@ -288,7 +365,12 @@ setExpiredCount(expired?.length ?? 0);
                   border-white/10
                 "
               >
-                <h3 className="text-3xl">
+                <h3
+  className="
+    text-2xl
+    sm:text-3xl
+  "
+>
                   🚪 Opportunities
                 </h3>
 
@@ -310,7 +392,12 @@ setExpiredCount(expired?.length ?? 0);
                   border-white/10
                 "
               >
-                <h3 className="text-3xl">
+                <h3
+  className="
+    text-2xl
+    sm:text-3xl
+  "
+>
                   📝 Blogs
                 </h3>
 
@@ -332,7 +419,12 @@ setExpiredCount(expired?.length ?? 0);
                   border-white/10
                 "
               >
-                <h3 className="text-3xl">
+                <h3
+  className="
+    text-2xl
+    sm:text-3xl
+  "
+>
                   👥 Students
                 </h3>
 
@@ -356,7 +448,12 @@ setExpiredCount(expired?.length ?? 0);
                   border-white/10
                 "
               >
-                <h3 className="text-3xl">
+                <h3
+  className="
+    text-2xl
+    sm:text-3xl
+  "
+>
                   🌟 Stories
                 </h3>
 
@@ -373,18 +470,27 @@ setExpiredCount(expired?.length ?? 0);
 
             <div
               className="
-                bg-[#2A2F72]
-                rounded-[40px]
-                p-14
-                text-center
-              "
+  bg-[#2A2F72]
+  rounded-[30px]
+  sm:rounded-[40px]
+  p-8
+  sm:p-14
+  text-center
+"
             >
               <img
                 src="/door-2.png"
                 alt="Door"
                 className="w-20 mx-auto mb-8"
               />
-              <h2 className="text-5xl leading-tight">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    leading-tight
+  "
+>
                 Every Door You Create
                 <span className="text-[#6C9BD5]">
                   {" "}
@@ -394,25 +500,24 @@ setExpiredCount(expired?.length ?? 0);
                 A Student's Future.
               </h2>
               <p
-                className="
-                  mt-8
-                  text-[#A3C2E0]
-                  italic
-                  text-2xl
-                "
-              >
+  className="
+    mt-6
+    sm:mt-8
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    italic
+    text-[#A3C2E0]
+  "
+>
                 "Great opportunities don't
                 happen by chance—they are
                 created by great people."
               </p>
             </div>
-
           </section>
-
         </div>
-
       </main>
-
     </>
   );
 }

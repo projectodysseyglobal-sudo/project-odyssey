@@ -166,7 +166,7 @@ export default function AdminStudentsPage() {
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
@@ -175,10 +175,24 @@ export default function AdminStudentsPage() {
             <img
               src="/door-2.png"
               alt="Door"
-              className="w-24 mx-auto"
+              className="
+  w-20
+  sm:w-24
+  md:w-28
+  mx-auto
+"
             />
-
-            <h1 className="text-7xl mt-8">
+            <h1
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
 
               STUDENT
 
@@ -191,11 +205,14 @@ export default function AdminStudentsPage() {
 
             <p
               className="
-                mt-6
-                text-2xl
-                italic
-                text-[#A3C2E0]
-              "
+  mt-4
+  sm:mt-6
+  text-lg
+  sm:text-xl
+  md:text-2xl
+  italic
+  text-[#A3C2E0]
+"
             >
               Manage registered students,
               explore interests and understand
@@ -222,13 +239,16 @@ export default function AdminStudentsPage() {
                 )
               }
               className="
-                w-full
-                bg-[#2A2F72]
-                rounded-2xl
-                p-5
-                outline-none
-                placeholder:text-[#A3C2E0]
-              "
+  w-full
+  bg-[#2A2F72]
+  rounded-2xl
+  px-5
+  py-4
+  sm:px-6
+  sm:py-5
+  outline-none
+  placeholder:text-[#A3C2E0]
+"
 
             />
 

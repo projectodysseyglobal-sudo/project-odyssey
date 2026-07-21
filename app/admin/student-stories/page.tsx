@@ -210,7 +210,7 @@ const filtered = stories.filter((story) => {
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
@@ -219,10 +219,25 @@ const filtered = stories.filter((story) => {
             <img
               src="/door-2.png"
               alt="Door"
-              className="w-28 mx-auto"
+              className="
+  w-20
+  sm:w-24
+  md:w-28
+  mx-auto
+"
             />
 
-            <h1 className="text-7xl mt-8">
+            <h1
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
 
               STUDENT
 
@@ -235,11 +250,14 @@ const filtered = stories.filter((story) => {
 
             <p
               className="
-                mt-6
-                text-2xl
-                italic
-                text-[#A3C2E0]
-              "
+  mt-4
+  sm:mt-6
+  text-lg
+  sm:text-xl
+  md:text-2xl
+  italic
+  text-[#A3C2E0]
+"
             >
               Celebrate inspiring journeys
               that motivate future students.
@@ -250,15 +268,18 @@ const filtered = stories.filter((story) => {
           {/* Search + Add */}
 
           <div
-            className="
-              mt-16
-              flex
-              flex-col
-              lg:flex-row
-              justify-between
-              items-center
-              gap-6
-            "
+           className="
+  mt-12
+  sm:mt-16
+  flex
+  flex-col
+  lg:flex-row
+  justify-between
+  items-stretch
+  lg:items-center
+  gap-4
+  sm:gap-6
+"
           >
 
             <div className="relative w-full lg:w-[520px]">
@@ -284,16 +305,17 @@ const filtered = stories.filter((story) => {
                   )
                 }
                 className="
-                  w-full
-                  rounded-full
-                  bg-[#A3C2E0]
-                  text-[#353C72]
-                  pl-14
-                  pr-6
-                  py-4
-                  outline-none
-                  placeholder:text-[#353C72]
-                "
+  w-full
+  rounded-full
+  bg-[#A3C2E0]
+  text-[#353C72]
+  pl-14
+  pr-6
+  py-3
+  sm:py-4
+  outline-none
+  placeholder:text-[#353C72]
+"
               />
 
             </div>
@@ -301,18 +323,23 @@ const filtered = stories.filter((story) => {
             <Link
               href="/admin/student-stories/new"
               className="
-                flex
-                items-center
-                gap-3
-                bg-[#F4C3D5]
-                text-[#353C72]
-                px-8
-                py-4
-                rounded-full
-                font-semibold
-                hover:scale-105
-                transition
-              "
+  flex
+  justify-center
+  items-center
+  gap-3
+  w-full
+  sm:w-auto
+  bg-[#F4C3D5]
+  text-[#353C72]
+  px-6
+  sm:px-8
+  py-3
+  sm:py-4
+  rounded-full
+  font-semibold
+  hover:scale-105
+  transition
+"
             >
 
               <Plus size={22} />
@@ -344,7 +371,7 @@ const filtered = stories.filter((story) => {
                 className="w-20 mx-auto opacity-60"
               />
 
-              <h2 className="text-4xl mt-8">
+              <h2 className="text-3xl sm:text-4xl mt-8">
                 No Student Stories Found
               </h2>
 
@@ -523,11 +550,13 @@ const filtered = stories.filter((story) => {
 
             <div
               className="
-                bg-[#2A2F72]
-                rounded-[40px]
-                p-14
-                text-center
-              "
+  bg-[#2A2F72]
+  rounded-[30px]
+  sm:rounded-[40px]
+  p-8
+  sm:p-14
+  text-center
+"
             >
 
               <img
@@ -536,7 +565,14 @@ const filtered = stories.filter((story) => {
                 className="w-20 mx-auto mb-8"
               />
 
-              <h2 className="text-5xl leading-tight">
+              <h2
+  className="
+    text-3xl
+    sm:text-4xl
+    lg:text-5xl
+    leading-tight
+  "
+>
 
                 Every Story
 
@@ -553,11 +589,14 @@ const filtered = stories.filter((story) => {
 
               <p
                 className="
-                  mt-8
-                  text-[#A3C2E0]
-                  italic
-                  text-2xl
-                "
+  mt-6
+  sm:mt-8
+  text-lg
+  sm:text-xl
+  md:text-2xl
+  italic
+  text-[#A3C2E0]
+"
               >
                 "Success stories inspire confidence,
                 build ambition and remind every

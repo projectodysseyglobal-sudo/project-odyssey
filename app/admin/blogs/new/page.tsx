@@ -67,7 +67,7 @@ export default function NewBlogPage() {
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-5xl mx-auto px-8 py-12">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
@@ -76,10 +76,25 @@ export default function NewBlogPage() {
             <img
               src="/door-2.png"
               alt="Door"
-              className="w-28 mx-auto"
+              className="
+  w-20
+  sm:w-24
+  md:w-28
+  mx-auto
+"
             />
 
-            <h1 className="text-7xl mt-8">
+            <h1
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
 
               CREATE
 
@@ -92,11 +107,14 @@ export default function NewBlogPage() {
 
             <p
               className="
-                mt-6
-                text-2xl
-                italic
-                text-[#A3C2E0]
-              "
+  mt-4
+  sm:mt-6
+  text-lg
+  sm:text-xl
+  md:text-2xl
+  italic
+  text-[#A3C2E0]
+"
             >
               Every article opens a new
               door of knowledge for
@@ -250,8 +268,12 @@ export default function NewBlogPage() {
                   router.push("/admin/blogs")
                 }
                 className="
-                  px-10
-                  py-4
+  w-full
+  sm:w-auto
+  px-8
+  sm:px-10
+  py-3
+  sm:py-4
                   rounded-full
                   border
                   border-[#F4C3D5]
@@ -267,8 +289,12 @@ export default function NewBlogPage() {
               <button
                 onClick={saveBlog}
                 className="
-                  px-10
-                  py-4
+  w-full
+  sm:w-auto
+  px-8
+  sm:px-10
+  py-3
+  sm:py-4
                   rounded-full
                   bg-[#F4C3D5]
                   text-[#353C72]

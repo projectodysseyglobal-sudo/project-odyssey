@@ -320,7 +320,7 @@ if (subjects.length === 0) {
 
       <main className="min-h-screen bg-[#353C72] text-[#F8F8F4]">
 
-        <div className="max-w-5xl mx-auto px-8 py-12">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
 
           {/* Hero */}
 
@@ -329,10 +329,25 @@ if (subjects.length === 0) {
             <img
               src="/door-2.png"
               alt="Door"
-              className="w-28 mx-auto"
+              className="
+  w-20
+  sm:w-24
+  md:w-28
+  mx-auto
+"
             />
 
-            <h1 className="text-7xl mt-8">
+           <h1
+  className="
+    mt-6
+    sm:mt-8
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    lg:text-7xl
+    leading-none
+  "
+>
               EDIT
               <span className="text-[#6C9BD5]">
                 {" "}
@@ -340,7 +355,17 @@ if (subjects.length === 0) {
               </span>
             </h1>
 
-            <p className="mt-6 text-2xl italic text-[#A3C2E0]">
+            <p
+  className="
+    mt-4
+    sm:mt-6
+    text-lg
+    sm:text-xl
+    md:text-2xl
+    italic
+    text-[#A3C2E0]
+  "
+>
               Refine an existing opportunity
               for students.
             </p>
@@ -638,16 +663,20 @@ if (subjects.length === 0) {
                   )
                 }
                 className="
-                  px-10
-                  py-4
-                  rounded-full
-                  border
-                  border-[#F4C3D5]
-                  text-[#F4C3D5]
-                  hover:bg-[#F4C3D5]
-                  hover:text-[#353C72]
-                  transition
-                "
+  w-full
+  sm:w-auto
+  px-8
+  sm:px-10
+  py-3
+  sm:py-4
+  rounded-full
+  border
+  border-[#F4C3D5]
+  text-[#F4C3D5]
+  hover:bg-[#F4C3D5]
+  hover:text-[#353C72]
+  transition
+"
               >
                 Cancel
               </button>
@@ -655,15 +684,19 @@ if (subjects.length === 0) {
               <button
                 onClick={updateOpportunity}
                 className="
-                  px-10
-                  py-4
-                  rounded-full
-                  bg-[#F4C3D5]
-                  text-[#353C72]
-                  font-semibold
-                  hover:scale-105
-                  transition
-                "
+  w-full
+  sm:w-auto
+  px-8
+  sm:px-10
+  py-3
+  sm:py-4
+  rounded-full
+  bg-[#F4C3D5]
+  text-[#353C72]
+  font-semibold
+  hover:scale-105
+  transition
+"
               >
                 Update Opportunity
               </button>
