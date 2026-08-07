@@ -149,6 +149,8 @@ export default function StudentStoriesPage() {
 
 <section
   className="
+  relative
+      -mt-[1px]
     bg-[#6C9BD5]
     text-[#2F3B6F]
     px-6
@@ -157,6 +159,7 @@ export default function StudentStoriesPage() {
     py-14
     sm:py-18
     lg:py-20
+    overflow-hidden
   "
 >
 
@@ -321,13 +324,14 @@ export default function StudentStoriesPage() {
 
 <section
   className="
-    relative
+    relative 
     px-6
     sm:px-8
     lg:px-10
     py-16
     sm:py-20
     lg:py-24
+    
   "
 >
 

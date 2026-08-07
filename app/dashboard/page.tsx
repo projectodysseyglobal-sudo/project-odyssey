@@ -123,9 +123,12 @@ return (
       <div className="grid lg:grid-cols-2 gap-8">
         {saved.map((item) => (
           <div
-            key={item.id}
-            className="relative"
-          >
+  key={item.id}
+  className="
+    relative
+    self-start
+  "
+>
             <OpportunityCard
               id={item.opportunities?.id}
               title={item.opportunities?.title}

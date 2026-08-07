@@ -156,54 +156,54 @@ export default function SavedPage() {
 
           ) : (
 
-            <div className="grid lg:grid-cols-2 gap-8 mt-16">
+            <div className="grid lg:grid-cols-2 gap-8 mt-12 item-start">
 
-              {saved.map((item) => (
+             {saved.map((item) => (
 
-                <div
-                  key={item.id}
-                  className="relative"
-                >
+  <div
+    key={item.id}
+    className="flex flex-col"
+  >
 
-                  <OpportunityCard
-                    id={item.opportunities?.id}
-                    title={
-                      item.opportunities?.title
-                    }
-                    category={
-                      item.opportunities?.category
-                    }
-                    subject={
-                      item.opportunities?.subject
-                    }
-                    deadline={
-                      item.opportunities?.deadline
-                    }
-                  />
+    <OpportunityCard
+      id={item.opportunities?.id}
+      title={item.opportunities?.title}
+      category={item.opportunities?.category}
+      subject={item.opportunities?.subject}
+      deadline={item.opportunities?.deadline}
+    />
 
-                  <button
-                    onClick={() =>
-                      removeSaved(item.id)
-                    }
-                    className="
-                      absolute
-                      bottom-8
-                      right-8
-                      text-[#F4C3D5]
-                      underline
-                      decoration-dotted
-                      underline-offset-4
-                      hover:text-red-300
-                      transition
-                    "
-                  >
-                    Remove
-                  </button>
+    <div
+      className="
+        flex
+        justify-end
+        -mt-16
+        pr-8
+        pb-6
+      "
+    >
 
-                </div>
+      <button
+        onClick={() =>
+          removeSaved(item.id)
+        }
+        className="
+          text-[#F4C3D5]
+          underline
+          decoration-dotted
+          underline-offset-4
+          hover:text-red-300
+          transition
+        "
+      >
+        Remove
+      </button>
 
-              ))}
+    </div>
 
+  </div>
+
+))}
             </div>
 
           )}
