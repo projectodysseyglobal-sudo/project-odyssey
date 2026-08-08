@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,21 +22,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Discover scholarships, internships, competitions, research programs, fellowships, conferences, and global opportunities. Build your future with Project Odyssey.",
-
-  keywords: [
-    "Scholarships",
-    "Internships",
-    "Research",
-    "Competitions",
-    "Students",
-    "Global Opportunities",
-    "Project Odyssey",
-    "Education",
-    "Career",
-    "Fellowships",
-    "STEM",
-  ],
+    "Discover scholarships, internships, competitions, research programs, fellowships, conferences, and global opportunities for students worldwide.",
 
   authors: [
     {
@@ -100,7 +87,28 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-HD541YHN4S"
+          strategy="afterInteractive"
+        />
+
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-HD541YHN4S');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
