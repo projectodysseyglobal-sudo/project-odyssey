@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
         email,
         {
           redirectTo:
-            "https://project-odyssey-chi.vercel.app/update-password",
+            "https://www.projectodysseyglobal.org/update-password",
         }
       );
 
